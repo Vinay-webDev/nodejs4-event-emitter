@@ -19,7 +19,7 @@ myEmitter.on('log', (msg) => {
 
 //setTimeout to have delayed log events
 setTimeout(() => {
-    myEmitter.emit('log', 'Event log emitted!');
+    myEmitter.emit('log', 'Log event emitted!');
 }, 2000);
 /* as we can see we got our logData logged to the console
 however we got into an error if you observe there's no directory called 'logs' in the file tree

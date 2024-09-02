@@ -17,9 +17,9 @@ const fsPromises = require('fs').promises;
 const path = require('path');
 
 
-const logEvents = async(message) => {
+const logEventsOne = async(message) => {
     const date = format(new Date(), 'yyyyMMdd\tHH:mm:ss');
-    const logData = `${date}\t${uuid}\t${message}`;
+    const logData = `${date}\t${uuid()}\t${message}`;
     console.log(logData);
     ///here comes the async() part
     // we need to write these log data in a new file
@@ -31,12 +31,28 @@ const logEvents = async(message) => {
     }
 }
 // Let's export this custom module
+//module.exports = logEvents;
+
+// to fix that error we need to check to see if there is directory present if not then we need to create it
+// also you observe that we still have'nt used our fs module yet so now it's time to use it 
+//👉👉don't forget to add a line in the logData date so that it can have new logs in new line👈👈
+const logEvents = async(message) => {
+    const date = format(new Date(), 'yyyyMMdd\tHH:mm:ss');
+    const logData = `${date}\t${uuid()}\t${message}\n`;
+    console.log(logData);
+
+    try {
+        if (!fs.existsSync(path.join(__dirname, 'logs'))) {
+            fsPromises.mkdir(path.join(__dirname, 'logs'));
+        }
+        await fsPromises.appendFile(path.join(__dirname, 'logs', 'eventLogs.txt'), logData);
+        
+    } catch(err) {
+        console.error(err);
+    }
+}
 module.exports = logEvents;
-
-
-
-
-
+//every time you press ctrl+s this will emit a log event
 
 
 
