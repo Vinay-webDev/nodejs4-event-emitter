@@ -10,11 +10,28 @@
 const { format } = require('date-fns');
 const { v4: uuid } = require('uuid');
 
+//Let's also import common core modules we need those
+
+const fs = require('fs');
+const fsPromises = require('fs').promises;
+const path = require('path');
 
 
-
-
-
+const logEvents = async(message) => {
+    const date = format(new Date(), 'yyyyMMdd\tHH:mm:ss');
+    const logData = `${date}\t${uuid}\t${message}`;
+    console.log(logData);
+    ///here comes the async() part
+    // we need to write these log data in a new file
+    // 👉👉don't forget to use await👈👈
+    try {
+        await fsPromises.appendFile(path.join(__dirname, 'logs', 'eventLogs.txt'), logData);
+    } catch(err) {
+        console.error(err);
+    }
+}
+// Let's export this custom module
+module.exports = logEvents;
 
 
 
