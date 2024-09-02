@@ -1,11 +1,15 @@
 //////////////////////////////////////////////////////////////////
 // event Emitter
-//👉👉👉remember before we add or install package to our project we need to initialize npm first👈👈👈
-/* install production dependencies ==>> npm i date-fns
+/*1.👉👉👉remember before we add or install package to our project we need to initialize npm first👈👈👈
+2.install production dependencies ==>> npm i date-fns
                                         npm i uuid
-and install nodemon as devDependency ===>> npm i nodemon -D
+3.and install nodemon as devDependency ===>> npm i nodemon -D
+4. 👉👉also don't forget to change scripts👈👈
 */
 ///////////////////////////////////////////////////////////////////////////////////
+const { format } = require('date-fns');
+const { v4: uuid } = require('uuid');
+
 
 
 
